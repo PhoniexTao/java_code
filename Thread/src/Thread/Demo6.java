@@ -14,11 +14,12 @@ class MyBlockingQueue{
     public MyBlockingQueue(int capacity){
         data  = new String[capacity];
     }
-    public void  put(String elem){
+    public void  put(String elem) throws InterruptedException {
         synchronized (this){
-            if(size >= data.length){
+            while(size >= data.length){
                 //队列满了，需要阻塞
-                return;
+                //阻塞最好用while循环判断，否则可能会被interrupt唤醒
+                this.wait();
             }
             data[tail] = elem;
             tail++;
@@ -27,14 +28,16 @@ class MyBlockingQueue{
                 tail = 0;
             }
             size++;
+            this.notify();
         }
 
     }
-    public String take(){
+    public String take() throws InterruptedException {
         synchronized (this){
-            if(size == 0){
+            while (size == 0){
                 //队列为空，需要阻塞
-                return null;
+//                return null;
+                this.wait();
             }
             String ret = data[head];
             head++;
@@ -42,6 +45,7 @@ class MyBlockingQueue{
                 head = 0;
             }
             size--;
+            this.notify();
             return ret;
         }
 
@@ -49,6 +53,31 @@ class MyBlockingQueue{
 }
 public class Demo6 {
     public static void main(String[] args) {
+        MyBlockingQueue queue = new MyBlockingQueue(1000);
+        Thread producer = new Thread(()->{
+           int n = 0;
+           while (true){
+               try {
+                   queue.put(n + "");
+                   System.out.println("生产元素" + n);
+                   n++;
+               } catch (InterruptedException e) {
+                   throw new RuntimeException(e);
+               }
 
+           }
+        });
+        Thread consumer = new Thread(()->{
+           while (true){
+               try {
+                   String n = queue.take();
+                   System.out.println("消费元素" + n);
+               } catch (InterruptedException e) {
+                   throw new RuntimeException(e);
+               }
+           }
+        });
+        producer.start();;
+        consumer.start();
     }
 }
