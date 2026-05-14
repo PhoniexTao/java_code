@@ -10,5 +10,5 @@ public abstract class User {
     }
 
     public abstract int menu();
-    public void doIoperation(int choice, BookList bookList){}
+    public abstract void doIoperation(int choice, BookList bookList);
 }

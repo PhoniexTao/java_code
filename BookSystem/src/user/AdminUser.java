@@ -9,7 +9,7 @@ public class AdminUser extends User{
     protected IOperations[] iOperations;
     public AdminUser(String name) {
         super(name);
-        iOperations = new IOperations[]{new ExitOpertaion(),new FindOperation(), new AddOperation(), new DelOperations(), new ShowOperation()};
+        iOperations = new IOperations[]{new ExitOperation(),new FindOperation(), new AddOperation(), new DelOperations(), new ShowOperation()};
     }
     public int menu(){
         System.out.println("******* 管理员菜单 ******");

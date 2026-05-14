@@ -9,7 +9,7 @@ public class NormalUser extends User {
     IOperations[] iOperations;
     public NormalUser(String name) {
         super(name);
-        iOperations = new IOperations[]{new ExitOpertaion(),new FindOperation(),new BorrowOperation(),new ReturnOperation()};
+        iOperations = new IOperations[]{new ExitOperation(),new FindOperation(),new BorrowOperation(),new ReturnOperation()};
     }
     public int menu(){
         System.out.println("欢迎来到" + this.name + "的图书系统");
