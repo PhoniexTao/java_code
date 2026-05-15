@@ -40,8 +40,8 @@ public class UdpEchoServer {
     }
 
 
-    //后续如果要写北大服务器，只要修改这个地方就好了
-    private String process(String request) {
+    //后续如果要写其他服务器，只要修改这个地方就好了
+    public String process(String request) {
         return  request;
     }
 
