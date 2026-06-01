@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/request")
 public class RequestController {
@@ -38,5 +40,11 @@ public class RequestController {
     @RequestMapping("/r8")
     public String r8(String[] arr){
         return "接收参数: arr = "+ arr;
+    }
+
+    //传递集合 ： 要进行参数绑定
+    @RequestMapping("/r9")
+    public String r9(@RequestParam List<Integer> list){
+        return  "接收参数 ： list = " + list;
     }
 }
