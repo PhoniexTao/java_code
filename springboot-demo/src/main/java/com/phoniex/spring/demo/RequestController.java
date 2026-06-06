@@ -1,11 +1,15 @@
 package com.phoniex.spring.demo;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.apache.catalina.User;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.http.HttpResponse;
 import java.util.List;
 
 @RestController
@@ -74,4 +78,70 @@ public class RequestController {
         file.transferTo(new File("E:/tmp/" + file.getOriginalFilename()));
         return "文件上传成功";
     }
+
+    @RequestMapping("/r13")
+    public String r13(HttpServletRequest request){
+        Cookie[] cookies = request.getCookies();
+        if(cookies != null){
+            for (Cookie cookie:cookies) {
+                System.out.println(cookie.getName() + ":" + cookie.getValue());
+            }
+        }
+        return "返回Cookie成功";
+    }
+
+    //注解方式获得Cookie
+    @RequestMapping("/r14")
+    public String r14(@CookieValue("java") String java){
+        return "从Cookie中获取Java的值：" + java;
+    }
+
+    //session的存储
+    @RequestMapping("/setSession")
+    public String setSession(HttpServletRequest request) {
+        //从Cookie中获取sessionId，根据sessionId 获取session对象
+        HttpSession session = request.getSession(true);
+        //这里默认为true ，是true时，如果没有获取到session 返回一个空的Session对象，
+        //              时false时，如果没有获取到session，返回null
+        //这里是存储session，所以直接返回空对象即可
+        session.setAttribute("userName", "zhangsan");
+        session.setAttribute("age", 17);
+        return "设置session成功";
+
+    }
+    //获取session
+    @RequestMapping("/getSession")
+    public String getSeesion(HttpServletRequest request){
+        //从cookie中获取sessionId，根据sessionId，获取Session元素
+        HttpSession session = request.getSession(false);
+        if(session == null){
+            return "用户未登录";
+        }else{
+             //从session中获取登录用户的信息
+            String userName = (String) session.getAttribute("userName");
+            return "登录用户为：";
+        }
+    }
+    @RequestMapping("/getSession2")
+    public String getSeesion(HttpSession session){
+            String userName = (String) session.getAttribute("userName");
+            return "登录用户为：";
+    }
+    @RequestMapping("/getSession3")
+    public String getSeesion(@SessionAttribute("userName") String userName){
+        return "登录用户为：";
+    }
+
+    //获取header
+    @RequestMapping("/getHeader")
+    public String getHeader(HttpServletRequest request){
+        String userAgent = request.getHeader("User-Agent");
+        return "从heardr中获取userAgent" + userAgent;
+    }
+    @RequestMapping("/getHeader2")
+    public String getHeader2(@RequestHeader("User-Agent")String userAgent){
+        return "从heardr中获取userAgent" + userAgent;
+    }
+
+
 }
