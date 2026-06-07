@@ -1,6 +1,8 @@
 package com.phoniex.spring.demo;
 
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -42,5 +44,18 @@ public class ResponController {
         return userInfo;
 
     }
+    @ResponseBody
+    @RequestMapping(value = "/r6")
+    public UserInfo setStatus(HttpServletResponse response){
+        response.setStatus(401);
+        UserInfo userInfo = new UserInfo("zhangsan",1,1);
+        return userInfo;
+    }
 
+    @ResponseBody
+    @RequestMapping(value = "/r7")
+    public String setHeader(HttpServletResponse response){
+        response.setHeader("myHeader","myHeader");
+        return "设置Header成功";
+    }
 }
