@@ -1,30 +1,39 @@
 package com.phoniex.spring.demo;
 
-import org.springframework.web.bind.annotation.*;
+import ch.qos.logback.core.util.StringUtil;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@RestController
 @RequestMapping("/user")
+@RestController
 public class UserController {
-        //即支持get，又支持post
-        @RequestMapping("/m1")
-        public String hello(){
-            return "m1";
+    @RequestMapping("/login")
+    public Boolean login(String userName, String password, HttpSession session){
+        //参数的校验
+//        if(userName == null || userName == "" || password == null || password == ""){
+//
+//        }
+        if(!StringUtils.hasLength(userName) || !StringUtils.hasLength(password)){
+            return false;
         }
-//        只支持get
-        @RequestMapping(value = "/m2",method = RequestMethod.GET)
-        public String m2(){
-            return "m2";
+        //校验用户名密码是否正确
+        //还未学习数据库相关的操作，暂且把账号密码写死
+        if("admin".equals(userName) && "123456".equals(password)){
+            //密码正确
+            session.setAttribute("userName",userName);
+            return true;
         }
-        @RequestMapping(value = "/m2",method = {RequestMethod.GET,RequestMethod.POST})
-        public String s3(){
-            return "m3";
-        }
-        @GetMapping("/m4")
-        public String m4(){
-            return "m4";
-        }
-        @PostMapping("/m5")
-        public String m5(){
-            return "m5";
-        }
+        return false;
     }
+
+    @RequestMapping("/getLoginUser")
+    public  String getLoginUser(HttpSession session){
+        String userName = (String) session.getAttribute("userName");
+
+        return userName;
+    }
+
+
+}
