@@ -8,7 +8,9 @@ import lombok.Setter;
 public class MessageInfo {
     @Getter @Setter
     private String from;
+    @Getter
     private String to;
+    @Getter
     private String message;
 
 
