@@ -39,7 +39,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <!-- <tr>
                     <td><input type="checkbox" name="selectBook" value="1" id="selectBook" class="book-select"></td>
                     <td>1</td>
                     <td>大秦帝国第一册</td>
@@ -102,7 +102,7 @@
                             <a href="javascript:void(0)" onclick="deleteBook(4)">删除</a>
                         </div>
                     </td>
-                </tr>
+                </tr> -->
             </tbody>
         </table>
 
@@ -113,7 +113,33 @@
 
             getBookList();
             function getBookList() {
-                
+                $.ajax({
+                    type : "get",
+                    url : "/book/getList",
+                    success: function(books){
+                        var finalHtml = "";
+                        for(var book of books){
+                            finalHtml += '<tr>';
+                            finalHtml += '<td><input type="checkbox" name="selectBook" value="'+book.bookId+'" id="selectBook" class="book-select"></td>';
+                            finalHtml += '<td>'+book.bookId+'</td>';
+                            finalHtml += '<td>'+book.bookName+'</td>';
+                            finalHtml += ' <td>'+book.author+'</td>';
+                            finalHtml += ' <td>'+book.num+'</td>';    
+                            finalHtml += '<td>'+book.price+'</td>';
+                            finalHtml += '<td>'+book.publish+'</td>';
+                            finalHtml += '<td>'+book.statusCn+'</td>';
+                            finalHtml += '<td>';
+                            finalHtml += '<div class="op">';
+                            finalHtml += '<a href="book_update.html?bookId='+book.bookId+'">修改</a>';
+                            finalHtml += '<a href="javascript:void(0)" onclick="deleteBook('+book.bookId+')">删除</a>';
+                            finalHtml += '</div>';
+                            finalHtml += '</td>';
+                            finalHtml += '</tr>';
+                        }
+                        $("tbody").html(finalHtml);
+                    }
+
+                });
             }
     
             //翻页信息

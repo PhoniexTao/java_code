@@ -1,4 +1,4 @@
-package com.phoniex.book;
+package com.phoniex.book.controller;
 
 import jakarta.servlet.http.HttpSession;
 import org.springframework.util.StringUtils;
