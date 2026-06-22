@@ -1,0 +1,31 @@
+server:
+  port: 8080
+my:
+  key1: 10
+  key2: 20
+#一层key
+mykey: value
+#多层
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/testdb?characterEncoding=utf8&useSSL=false
+    username: root
+    password: root
+
+#对象的配置
+Person :
+  id: 1
+  name: java113
+  age: 18
+
+dbtypes:
+# 集合的配置
+  name:
+    - mysql
+    - sqlserver
+    - db2
+#配置Map
+  ball :
+    k1: v1
+    k2: v2
+    k3: v3
