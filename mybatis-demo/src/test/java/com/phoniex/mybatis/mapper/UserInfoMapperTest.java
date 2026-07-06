@@ -75,4 +75,14 @@ class UserInfoMapperTest {
         userInfo.setPhone("1833423152");
         userInfoMapper.updateUser(userInfo);
     }
+
+    @Test
+    void selectUserInfoByOrder() {
+        userInfoMapper.selectUserInfoByOrder("desc").stream().forEach(x-> System.out.println(x));
+    }
+
+    @Test
+    void selectUserInfoByLike() {
+        userInfoMapper.selectUserInfoByLike("asc").stream().forEach(x-> System.out.println(x));
+    }
 }

@@ -37,4 +37,14 @@ class UserInfoMapperXMLTest {
         Integer result = userInfoMapperXML.insertUser(userInfo);
         System.out.println("影响行数：" + result + ", 自增id:"+ userInfo.getId());
     }
+
+    @Test
+    void updateUser() {
+        userInfoMapperXML.updateUser("updatePasswors5",  8,12);
+    }
+
+    @Test
+    void deleteUser() {
+        userInfoMapperXML.deleteUser(12);
+    }
 }

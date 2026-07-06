@@ -16,7 +16,7 @@ public interface UserInfoMapperXML {
     Integer insertUser(UserInfo userInfo);
     Integer insertUser2(@Param("userInfo") UserInfo userInfo);
 
-    Integer updateUser(String password,String age, Integer id);
+    Integer updateUser(String password,Integer age, Integer id);
 
     Integer deleteUser(Integer id);
 }

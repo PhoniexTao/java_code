@@ -45,4 +45,9 @@ public interface UserInfoMapper {
     @Update("update user_info set delete_flag = #{deleteFlag},phone = #{phone} where id = #{id}")
     Integer updateUser(UserInfo userInfo);
 
+    @Select("select * from user_info order by id ${order})")
+    List<UserInfo> selectUserInfoByOrder(String order);
+
+    @Select("select * from user_info where username like CONCAT ('%'#{username}'%')")
+    List<UserInfo> selectUserInfoByLike(String userName);
 }
