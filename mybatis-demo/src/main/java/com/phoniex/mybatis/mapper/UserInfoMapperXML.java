@@ -19,4 +19,10 @@ public interface UserInfoMapperXML {
     Integer updateUser(String password,Integer age, Integer id);
 
     Integer deleteUser(Integer id);
+
+    List<UserInfo> selectByCondition(UserInfo userInfo);
+
+    Integer updateByConfition(UserInfo userInfo);
+
+    Integer batchDelete(List<Integer> ids);
 }

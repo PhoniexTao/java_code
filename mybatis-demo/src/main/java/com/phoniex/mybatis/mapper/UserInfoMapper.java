@@ -50,4 +50,23 @@ public interface UserInfoMapper {
 
     @Select("select * from user_info where username like CONCAT ('%'#{username}'%')")
     List<UserInfo> selectUserInfoByLike(String userName);
+
+    @Insert("<srcipt>" +
+            "insert into user_info " +
+            "<trim prefixOverrides=\",\" suffixOverrides=\",\" prefix=\"(\" suffix=\")\">" +
+            "<if test='username!=null'> username, </if>" +
+            "<if test='password!=null'> password, </if>" +
+            "<if test='age!=null'> age, </if>" +
+            "<if test='gender!=null'> gender, </if>" +
+            "<if test='phone!=null'> phone, </if>" +
+            "</trim> VALUES" +
+            "<trim prefixOverrides=\",\" suffixOverrides=\",\" prefix=\"(\" suffix=\")\">" +
+            "<if test='username!=null'> #{username}, </if>" +
+            "<if test='password!=null'> #{password}, </if>" +
+            "<if test='age!=null'> #{age}, </if>" +
+            "<if test='gender!=null'> #{gender}, </if>" +
+            "<if test='phone!=null'> #{phone}, </if>" +
+            "</trim>" +
+            "</srcipt>")
+    Integer insertUser3(UserInfo userInfo);
 }
