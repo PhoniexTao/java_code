@@ -1,12 +1,11 @@
-package com.phoniex.spring.demo;
+package com.phoniex.spring.demo.controller;
 
 
-import jakarta.servlet.http.HttpServletRequest;
+import com.phoniex.spring.demo.model.UserInfo;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 @RequestMapping("/resp")
 //如果想返回页面，用Controller注解

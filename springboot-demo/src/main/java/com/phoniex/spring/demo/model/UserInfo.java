@@ -1,4 +1,4 @@
-package com.phoniex.spring.demo;
+package com.phoniex.spring.demo.model;
 
 public class UserInfo {
     private String name;

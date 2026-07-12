@@ -1,15 +1,14 @@
-package com.phoniex.spring.demo;
+package com.phoniex.spring.demo.controller;
 
+import com.phoniex.spring.demo.model.UserInfo;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import org.apache.catalina.User;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.http.HttpResponse;
 import java.util.List;
 
 @RestController

@@ -2,9 +2,8 @@ package com.phoniex.spring.demo;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.phoniex.spring.demo.model.UserInfo;
 import org.junit.jupiter.api.Test;
-
-import java.lang.runtime.ObjectMethods;
 
 public class JsonTest {
 

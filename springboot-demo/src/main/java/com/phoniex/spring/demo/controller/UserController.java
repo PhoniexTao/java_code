@@ -1,4 +1,4 @@
-package com.phoniex.spring.demo;
+package com.phoniex.spring.demo.controller;
 
 import ch.qos.logback.core.util.StringUtil;
 import jakarta.servlet.http.HttpSession;

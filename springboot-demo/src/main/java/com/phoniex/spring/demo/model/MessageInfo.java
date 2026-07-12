@@ -1,17 +1,18 @@
-package com.phoniex.spring.demo;
+package com.phoniex.spring.demo.model;
 
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
 
+@Data
 public class MessageInfo {
-    @Getter @Setter
     private String from;
-    @Getter
     private String to;
-    @Getter
     private String message;
-
+    private Integer deleteFlag;
+    private Date createTime;
+    private Date updateTime;
 
 }

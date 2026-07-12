@@ -1,5 +1,6 @@
-package com.phoniex.spring.demo;
+package com.phoniex.spring.demo.controller;
 
+import com.phoniex.spring.demo.model.MessageInfo;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
