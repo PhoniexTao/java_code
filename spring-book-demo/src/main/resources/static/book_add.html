@@ -64,6 +64,23 @@
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script>
         function add() {
+        //前端应该进行参数校验
+        //提交请求到后端
+        $.ajax({
+            type:"post",
+            url:"/book/addBook",
+            data: $("#addBook").serialize(),
+            success: function(result){
+                if(result== ""){
+                    //添加图书成功
+                    localStorage.href = "book_list.html";
+                }else{
+                    //失败
+                    alert(result);
+                }
+            }
+        });
+
             alert("添加成功");
             location.href = "book_list.html";
         }

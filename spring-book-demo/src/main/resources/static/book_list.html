@@ -103,6 +103,7 @@
                         </div>
                     </td>
                 </tr> -->
+
             </tbody>
         </table>
 
@@ -115,13 +116,23 @@
             function getBookList() {
                 $.ajax({
                     type : "get",
-                    url : "/book/getList",
-                    success: function(books){
+                    // location.search 找的是location.herf 中 ? 后的参数
+                    url : "/book/getListByPage"+location.search,
+                    success: function(result){
+                        if(result!=null && result.code == "UNLOGIN"){
+                            alert("用户未登录，请先登录再")
+                            location.href = "login.html";
+                        }
+                        //其他情况判断，此处省略
+                        if(result != null && result.data == null){
+
+                        }
+                        var books = result.records;
                         var finalHtml = "";
                         for(var book of books){
                             finalHtml += '<tr>';
-                            finalHtml += '<td><input type="checkbox" name="selectBook" value="'+book.bookId+'" id="selectBook" class="book-select"></td>';
-                            finalHtml += '<td>'+book.Id+'</td>';
+                            finalHtml += '<td><input type="checkbox" name="selectBook" value="'+book.bookid+'" id="selectBook" class="book-select"></td>';
+                            finalHtml += '<td>'+book.id+'</td>';
                             finalHtml += '<td>'+book.bookName+'</td>';
                             finalHtml += ' <td>'+book.author+'</td>';
                             finalHtml += ' <td>'+book.count+'</td>';
@@ -137,32 +148,47 @@
                             finalHtml += '</tr>';
                         }
                         $("tbody").html(finalHtml);
+
+                         //翻页信息
+                        $("#pageContainer").jqPaginator({
+                            totalCounts: result.total, //总记录数
+                            pageSize: 10,    //每页的个数
+                            visiblePages: 5, //可视页数
+                            currentPage: result.pageRequest.currentPage,  //当前页码
+                            first: '<li class="page-item"><a class="page-link">首页</a></li>',
+                            prev: '<li class="page-item"><a class="page-link" href="javascript:void(0);">上一页<\/a><\/li>',
+                            next: '<li class="page-item"><a class="page-link" href="javascript:void(0);">下一页<\/a><\/li>',
+                            last: '<li class="page-item"><a class="page-link" href="javascript:void(0);">最后一页<\/a><\/li>',
+                            page: '<li class="page-item"><a class="page-link" href="javascript:void(0);">{{page}}<\/a><\/li>',
+                            //页面初始化和页码点击时都会执行
+                            onPageChange: function (page, type) {
+                                if(type=="change"){
+                                    location.href = "book_list.html?currentPage="+ page;
+                                }
+                                console.log("第"+page+"页, 类型:"+type);
+                            }
+                        });
                     }
 
                 });
             }
     
-            //翻页信息
-            $("#pageContainer").jqPaginator({
-                totalCounts: 100, //总记录数
-                pageSize: 10,    //每页的个数
-                visiblePages: 5, //可视页数
-                currentPage: 1,  //当前页码
-                first: '<li class="page-item"><a class="page-link">首页</a></li>',
-                prev: '<li class="page-item"><a class="page-link" href="javascript:void(0);">上一页<\/a><\/li>',
-                next: '<li class="page-item"><a class="page-link" href="javascript:void(0);">下一页<\/a><\/li>',
-                last: '<li class="page-item"><a class="page-link" href="javascript:void(0);">最后一页<\/a><\/li>',
-                page: '<li class="page-item"><a class="page-link" href="javascript:void(0);">{{page}}<\/a><\/li>',
-                //页面初始化和页码点击时都会执行
-                onPageChange: function (page, type) {
-                    console.log("第"+page+"页, 类型:"+type);
-                }
-            });
+            
             function deleteBook(id) {
                 var isDelete = confirm("确认删除?");
                 if (isDelete) {
                     //删除图书
-                    alert("删除成功");
+                    $.ajax({
+                        type:"post",
+                        url: "/book/deleteBook?bookId" + id,
+                        success:function(result){
+                            if(result = ""){
+                                location.href = "book_list.html?currentPage=1";
+                            }else{
+                                alert(result);
+                            }
+                        } 
+                    })
                 }
             }
             function batchDelete() {
@@ -174,7 +200,20 @@
                         ids.push($(this).val());
                     });
                     console.log(ids);
-                    alert("批量删除成功");
+                    $.ajax({
+                        type:"post",
+                        url:"/book/batchDelete",
+                        data:{
+                            "ids" : ids
+                        },
+                        success: function(result){
+                            if(result){
+                                location.href = "book_list.html?currentPage=1";
+                            }else{
+                                alert("批量删除失败"); 
+                            }
+                        }
+                    })
                 }
             }
 

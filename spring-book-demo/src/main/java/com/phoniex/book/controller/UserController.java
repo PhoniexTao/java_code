@@ -1,12 +1,16 @@
 package com.phoniex.book.controller;
 
+import com.phoniex.book.constant.Constants;
 import com.phoniex.book.model.UserInfo;
+import com.phoniex.book.service.UserInfoService;
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RequestMapping("/user")
 @RestController
 public class UserController {
@@ -25,12 +29,12 @@ public class UserController {
         }
         //根据用户名，获取用户信息
         UserInfo userInfo = userInfoService.queryUserInfoByName(name);
-        if (userInfo == null){
+        if (userInfo == null) {
             return false;
         }
-        if(password.equals(userInfo.getPassword())){
+        if (password.equals(userInfo.getPassword())) {
             userInfo.setPassword("");
-            session.setAttribute("session_userinfo", userInfo);
+            session.setAttribute(Constants.SESSION_USER_KEY, userInfo);
             return true;
         }
         //未加入数据库，这里写死

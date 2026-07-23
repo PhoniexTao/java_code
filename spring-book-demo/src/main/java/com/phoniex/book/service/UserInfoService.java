@@ -1,4 +1,4 @@
-package com.phoniex.book.controller;
+package com.phoniex.book.service;
 
 import com.phoniex.book.mapper.UserInfomapper;
 import com.phoniex.book.model.UserInfo;
