@@ -73,7 +73,7 @@ public class BookController {
         UserInfo userInfo = (UserInfo) session.getAttribute(Constants.SESSION_USER_KEY);
         if(userInfo == null || userInfo.getId() <= 0){
             //用户未登录
-          return Result.unlogin ();
+            return Result.unlogin ();
         }
 
         //参数校验

@@ -152,4 +152,6 @@ class UserInfoMapperTest {
         queryWrapper.in("id",List.of(1,2,3));
         userInfoMapper.updateById2(10,queryWrapper);
     }
+
+
 }
