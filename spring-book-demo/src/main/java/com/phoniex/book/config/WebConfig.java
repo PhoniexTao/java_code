@@ -12,10 +12,10 @@ public class WebConfig implements WebMvcConfigurer {
     private LoginInterceptor loginInterceptor;
 
     @Override
-    public void addInterceptors(InterceptorRegistry registry) {
+    public void addInterceptors(InterceptorRegistry registry) {   // 给拦截器对象进行具体操作的添加
         registry.addInterceptor(loginInterceptor)
-            .addPathPatterns("/**")
-            .excludePathPatterns("/user/login");
+            .addPathPatterns("/book/**");     //添加拦截路径
+//            .excludePathPatterns("/");     // 排除拦截路径
 
     }
 }

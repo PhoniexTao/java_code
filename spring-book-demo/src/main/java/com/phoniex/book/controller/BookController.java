@@ -62,7 +62,7 @@ public class BookController {
 
     @RequestMapping("/getListByPage")
     public Result<BookInfo> getListBypage(PageRequest pageRequest, HttpServletRequest request) {
-        //判断是否登录
+        /*//判断是否登录
         HttpSession session = request.getSession();
         if(session == null){
             throw new NullPointerException();
@@ -74,7 +74,7 @@ public class BookController {
         if(userInfo == null || userInfo.getId() <= 0){
             //用户未登录
             return Result.unlogin ();
-        }
+        }*/
 
         //参数校验
         //返回数据
