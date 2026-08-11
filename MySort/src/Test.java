@@ -144,7 +144,7 @@ public class Test {
         Random random = new Random();
         int[] arr = new int[100000];
         for (int i = 0; i < 10; i++) {
-            arr[i] = random.nextInt(10000);
+            arr[i] = random.nextInt(100000);
         }
         return arr;
     }

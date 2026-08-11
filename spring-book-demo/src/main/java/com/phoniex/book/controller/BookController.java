@@ -35,7 +35,7 @@ public class BookController {
 //    }
 
 
-    @RequestMapping("/addBook")
+    @RequestMapping(value = "/addBook",produces = "application/json")
     public String addBook(BookInfo bookInfo) {
         log.info("添加图书,request:{}" + bookInfo);
         //1.参数校验
@@ -88,7 +88,7 @@ public class BookController {
         return bookService.queryBookId(bookId);
     }
 
-    @RequestMapping("/updateBook")
+    @RequestMapping(value = "/updateBook",produces = "application/json")
     public String updateBook(BookInfo bookInfo) {
         log.info("修改图书,bookInfo: {}", bookInfo);
         try {
@@ -101,7 +101,7 @@ public class BookController {
         }
     }
 
-    @RequestMapping("/deleteBook")
+    @RequestMapping(value = "/deleteBook",produces = "application/json")
     //删除只需改变status属性即可
     public String deleteBook(Integer bookId) {
         log.info("修改图书,bookId: {}", bookId);

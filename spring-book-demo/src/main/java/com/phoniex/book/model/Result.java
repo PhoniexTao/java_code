@@ -29,7 +29,7 @@ public class Result<T> {
         result.setData(null);
         return result;
     }
-    public static <T> Result unlogin(){
+    public static <T> Result unlogin(   ){
         Result result = new Result();
         result.setCode(ResultCodeEnum.UNLOGIN);
         result.setErrMsg("用户未登录");

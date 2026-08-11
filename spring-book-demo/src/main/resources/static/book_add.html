@@ -71,12 +71,12 @@
             url:"/book/addBook",
             data: $("#addBook").serialize(),
             success: function(result){
-                if(result== ""){
+                if(result.code == "SUCCESS" && result==""){
                     //添加图书成功
                     localStorage.href = "book_list.html";
                 }else{
                     //失败
-                    alert(result);
+                    alert(result.errMsg);
                 }
             }
         });

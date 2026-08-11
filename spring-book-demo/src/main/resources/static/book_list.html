@@ -120,14 +120,16 @@
                     url : "/book/getListByPage"+location.search,
                     success: function(result){
                         if(result!=null && result.code == "UNLOGIN"){
-                            alert("用户未登录，请先登录再")
+                            alert("用户未登录，请先登录")
                             location.href = "login.html";
                         }
                         //其他情况判断，此处省略
                         if(result != null && result.data == null){
-
+                            return;
                         }
-                        var books = result.records;
+                        var data = result.data;
+                        
+                        var books = data.records;
                         var finalHtml = "";
                         for(var book of books){
                             finalHtml += '<tr>';
@@ -151,10 +153,10 @@
 
                          //翻页信息
                         $("#pageContainer").jqPaginator({
-                            totalCounts: result.total, //总记录数
+                            totalCounts: data.total, //总记录数
                             pageSize: 10,    //每页的个数
                             visiblePages: 5, //可视页数
-                            currentPage: result.pageRequest.currentPage,  //当前页码
+                            currentPage: data.pageRequest.currentPage,  //当前页码
                             first: '<li class="page-item"><a class="page-link">首页</a></li>',
                             prev: '<li class="page-item"><a class="page-link" href="javascript:void(0);">上一页<\/a><\/li>',
                             next: '<li class="page-item"><a class="page-link" href="javascript:void(0);">下一页<\/a><\/li>',
@@ -168,8 +170,15 @@
                                 console.log("第"+page+"页, 类型:"+type);
                             }
                         });
-                    }
-
+                    },
+                    error: function(error){
+                        if(error.status == 401){
+                            alert("用户未登录，请先登录");
+                            location.href = "login.html";
+                        }
+                        console.log(error);
+                        
+                    } 
                 });
             }
     
@@ -182,7 +191,7 @@
                         type:"post",
                         url: "/book/deleteBook?bookId" + id,
                         success:function(result){
-                            if(result = ""){
+                            if(result.code == "SUCCESS" && result.data == ""){
                                 location.href = "book_list.html?currentPage=1";
                             }else{
                                 alert(result);
@@ -207,7 +216,7 @@
                             "ids" : ids
                         },
                         success: function(result){
-                            if(result){
+                            if(result.code == "SUCCESS" && result.data == true){
                                 location.href = "book_list.html?currentPage=1";
                             }else{
                                 alert("批量删除失败"); 
