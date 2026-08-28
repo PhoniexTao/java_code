@@ -10,6 +10,8 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping("/user2")
 @Slf4j
@@ -17,7 +19,7 @@ public class UserController2 {
     @Autowired
     private UserService userService;
 
-    @Transactional
+    @Transactional(rollbackFor = {IOException.class, RuntimeException.class,Error.class})
     @RequestMapping("/registry")
     public String registry(String name, String password){
         //用户注册
@@ -30,4 +32,5 @@ public class UserController2 {
         }
         return "注册成功";
     }
+
 }
