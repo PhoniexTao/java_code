@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,6 +11,7 @@
     <link rel="stylesheet" href="css/list.css">
 
 </head>
+
 <body>
     <div class="nav">
         <img src="pic/logo2.jpg" alt="">
@@ -24,8 +26,8 @@
         <div class="left">
             <div class="card">
                 <img src="pic/doge.jpg" alt="">
-                <h3>比特汤老师</h3>
-                <a href="#">GitHub 地址</a>
+                <h3></h3>
+                <a href="#"></a>
                 <div class="row">
                     <span>文章</span>
                     <span>分类</span>
@@ -37,7 +39,7 @@
             </div>
         </div>
         <div class="right">
-            <div class="blog">
+            <!-- <div class="blog">
                 <div class="title">我的第一篇博客</div>
                 <div class="date">2021-06-02</div>
                 <div class="desc">今天开始, 好好学习Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas nesciunt, hic voluptatum, dolorem quisquam modi accusantium, commodi dolores architecto ratione vel exercitationem optio. Facere repellendus autem, obcaecati dolore sequi incidunt?</div>
@@ -48,10 +50,51 @@
                 <div class="date">2021-06-02</div>
                 <div class="desc">今天开始, 好好学习Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas nesciunt, hic voluptatum, dolorem quisquam modi accusantium, commodi dolores architecto ratione vel exercitationem optio. Facere repellendus autem, obcaecati dolore sequi incidunt?</div>
                 <a class="detail" href="blog_detail.html">查看全文&gt;&gt;</a>
-            </div>
+            </div> -->
         </div>
     </div>
     <script src="js/jquery.min.js"></script>
     <script src="js/common.js"></script>
+    <script>
+        getBlogList();
+        var url = "/user/getUserInfo?userId=" + localStorage.getItem("LoginUserId")
+        getUserInfo(url);
+        function getBlogList() {
+            $.ajax({
+                type: "get",
+                url: "/blog/getlist",
+                success: function (result) {
+                    //针对后端结果来进行校验
+                    if (result.code == "SUCCESS" && result.data != null && result.data.length > 0) {
+                        var finalHtml = "";
+                        for (var blogInfo of result.data) {
+                            finalHtml += '<div class="blog">'
+                            finalHtml += '<div class="title">' + blogInfo.title + '</div>'
+                            finalHtml += '<div class="date">' + blogInfo.createTime + '</div>'
+                            finalHtml += '<div class="desc">' + blogInfo.content + '</div>'
+                            finalHtml += '<a class="detail" href="blog_detail.html?blogId=' + blogInfo.id + '">查看全文&gt;&gt;</a>'
+                            finalHtml += ' </div>'
+                        }
+                        $(".right").html(finalHtml);
+                    }
+                }
+            })
+        }
+        // function getUserInfo() {
+        //     $.ajax({
+        //         type: "get",
+        //         url: "/user/getUserInfo?userId=" + localStorage.getItem("LoginUserId"),
+        //         success: function (result) {
+        //             if (result != null && result.code == "SUCCESS" && result.data != null) {
+        //                 var userInfo = result.data;
+        //                 $(".left.card h3").text(userInfo.userName);
+        //                 $(".left.card a").attr("herf",userInfo.githubUrl);
+        //             }
+        //         }
+        //     })
+        // }
+
+    </script>
 </body>
+
 </html>

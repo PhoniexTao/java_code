@@ -23,4 +23,5 @@ public class BlogInfo {
     private Integer deleteFlag;
     private LocalDate createTime;
     private LocalDate updateTime;
+
 }
