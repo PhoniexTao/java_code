@@ -23,9 +23,9 @@ public class UserInfo {
     @TableId(type = IdType.AUTO)
     private Integer id;
     private String userName;
-    private Integer password;
+    private String password;
     private String githubUrl;
     private Integer deleteFlag;
     private LocalDate createTime;
-    private LocalDate updateTIme;
+    private LocalDate updateTime;
 }

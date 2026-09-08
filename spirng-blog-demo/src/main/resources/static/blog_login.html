@@ -41,7 +41,30 @@
     <script src="js/jquery.min.js"></script>
     <script>
         function login() {
-            location.assign("blog_list.html");
+            $.ajax({
+                type: "post",
+                url: "/user/login",
+                contentType: "application/json",
+                data: JSON.stringify({
+                    userName: $("#username").val(),
+                    password: $("#password").val()
+                }),
+                success: function (result) {
+                    if (result != null && result.code == "SUCCESS") {
+                        //密码正常,存入令牌且跳转页面
+
+                        localStorage.setItem("loginUserId", result.data.userId),
+                            localStorage.setItem("userToken", result.data.token)
+                        location.href = "blog_list.html"
+                    } else {
+                        alert(result.errMsg);
+                    }
+                },
+                error: function () {
+                    alert("请求失败,请检查网络或服务状态");
+                }
+
+            })
         }
     </script>
 </body>
