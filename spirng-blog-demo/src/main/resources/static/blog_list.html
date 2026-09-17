@@ -61,7 +61,8 @@
     <script src="js/common.js"></script>
     <script>
         getBlogList();
-        var url = "/user/getUserInfo?userId=" + localStorage.getItem("loginUserId")
+        // var url = "/user/getUserInfo?userId=" + localStorage.getItem("loginUserId")
+        var url = "/user/getUserInfo"
         getUserInfo(url);
         function getBlogList() {
             $.ajax({

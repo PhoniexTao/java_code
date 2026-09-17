@@ -1,5 +1,6 @@
 package com.phoniex.blog.controller;
 
+import com.phoniex.blog.common.context.UserContext;
 import com.phoniex.blog.pojo.request.UserLoginRequest;
 import com.phoniex.blog.pojo.response.UserInfoResponse;
 import com.phoniex.blog.pojo.response.UserLoginResponse;
@@ -29,7 +30,9 @@ public class UserController {
     }
 
     @RequestMapping("/getUserInfo")
-    public UserInfoResponse getUserInfo(@NotNull(message = "userId不能为空") Integer userId) {
+//    public UserInfoResponse getUserInfo(@NotNull(message = "userId不能为空") Integer userId) {
+    public UserInfoResponse getUserInfo() {
+        Integer userId = UserContext.getUserId();
         log.info("获取用户信息：" + userId);
         return userService.getUserInfo(userId);
     }

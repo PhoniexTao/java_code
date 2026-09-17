@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.phoniex.chat_room.mapper.UserMapper">
+    <insert id="userInfoInsert" useGeneratedKeys="true" keyProperty="userId">
+        insert into user (username, password) value (#{userName}, #{password})
+    </insert>
+
+    <select id="selectByUserName" resultType="com.phoniex.chat_room.model.UserInfo">
+        select * from user where username = #{userName}
+    </select>
+    <select id="selectByUserId" resultType="com.phoniex.chat_room.model.UserInfo">
+        select * from user where userId = #{userId}
+    </select>
+</mapper>
