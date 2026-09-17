@@ -17,11 +17,16 @@ public class WebConfig implements WebMvcConfigurer {
 
         registry.addInterceptor(loginInterceptor)
             .addPathPatterns("/blog/**","/user/**")
+<<<<<<< HEAD
             .excludePathPatterns(
                 "/user/login",
                 "/blog/getlist",
                 "/blog/getBlogDetail",
                 "/user/getAuthorInfo"
             );
+=======
+            .excludePathPatterns("/user/login");
+
+>>>>>>> github/master
     }
 }

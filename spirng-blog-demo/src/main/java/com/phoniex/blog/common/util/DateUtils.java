@@ -13,5 +13,8 @@ public class DateUtils {
         return dateFormat.format(date);
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> github/master
 }

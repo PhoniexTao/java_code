@@ -13,7 +13,10 @@ import org.springframework.util.StringUtils;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Base64;
+<<<<<<< HEAD
 import java.util.Date;
+=======
+>>>>>>> github/master
 import java.util.Map;
 
 @Slf4j
@@ -22,11 +25,17 @@ public class JwtUtils {
 //    private static Key key = Keys.hmacShaKeyFor(SECRET_STRING.getBytes(StandardCharsets.UTF_8));
     private static Key key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(SECRET_STRING));
 
+<<<<<<< HEAD
     private static final long EXPIRATION = 2 * 60 * 60 * 1000L;
     public static String getToken(Map<String,Object> claims){
         String compact = Jwts.builder()
             .setClaims(claims)
             .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION))
+=======
+    public static String getToken(Map<String,Object> claims){
+        String compact = Jwts.builder()
+            .setClaims(claims)
+>>>>>>> github/master
             .signWith(key)
             .compact();
 

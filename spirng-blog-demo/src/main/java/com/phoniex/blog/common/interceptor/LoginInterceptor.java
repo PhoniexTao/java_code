@@ -1,9 +1,12 @@
 package com.phoniex.blog.common.interceptor;
 
 import com.phoniex.blog.common.constant.Constants;
+<<<<<<< HEAD
 import com.phoniex.blog.common.context.UserContext;
 import com.phoniex.blog.common.util.JwtUtils;
 import io.jsonwebtoken.Claims;
+=======
+>>>>>>> github/master
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -19,12 +22,17 @@ public class LoginInterceptor implements HandlerInterceptor {
         //约定前端把用户的token放在header中，所以要取出来
         String userToken = request.getHeader(Constants.USER_TOKEN_HEADER_KEY);
         log.info("header中获取token:" + userToken);
+<<<<<<< HEAD
         Claims claims = JwtUtils.parseToken(userToken);
         if(claims == null){
+=======
+        if(userToken == null){
+>>>>>>> github/master
             //用户没有传令牌进行拦截
             response.setStatus(401);
             return false;
         }
+<<<<<<< HEAD
         Object idObj = claims.get("id");
         if (idObj == null){
             response.setStatus(401);
@@ -38,5 +46,8 @@ public class LoginInterceptor implements HandlerInterceptor {
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
                                 Object handler, Exception ex) {
         UserContext.clear();              // 关键：线程池会复用线程，必须清理
+=======
+        return HandlerInterceptor.super.preHandle(request, response, handler);
+>>>>>>> github/master
     }
 }

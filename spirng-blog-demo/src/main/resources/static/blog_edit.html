@@ -38,21 +38,13 @@
     <script src="js/common.js"></script>
     <script type="text/javascript">
 
-        $(function () {
-            var editor = editormd("editor", {
-                width: "100%",
-                height: "550px",
-                path: "blog-editormd/lib/"
-            });
-        });
-
-        function submit() {
+     function submit() {
             $.ajax({
                 type: "post",
                 url : "/blog/add",
                 contentType: "application/json",
                 data: JSON.stringify({
-                    // userId: localStorage.getItem("loginUserId"),
+                    userId: location.getItem("loginUserId"),
                     title : $('#title').val(),
                     content : $('#content').val
                 }),

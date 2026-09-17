@@ -6,8 +6,13 @@ import lombok.Data;
 
 @Data
 public class AddBlogRequest {
+<<<<<<< HEAD
 //    @NotNull(message = "userId不能为空")
 //    private Integer userId;
+=======
+    @NotNull(message = "userId不能为空")
+    private Integer userId;
+>>>>>>> github/master
     @NotNull(message = "标题不能为空")
     private String title;
     @NotBlank(message = "内容不能为空")

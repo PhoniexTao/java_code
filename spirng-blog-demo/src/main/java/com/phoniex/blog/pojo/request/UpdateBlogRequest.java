@@ -2,13 +2,21 @@ package com.phoniex.blog.pojo.request;
 
 import com.sun.jdi.PrimitiveValue;
 import jakarta.validation.constraints.NotNull;
+<<<<<<< HEAD
 import lombok.Data;
 
 @Data
+=======
+
+>>>>>>> github/master
 public class UpdateBlogRequest {
     @NotNull(message = "id不能为null")
     private Integer id;
     private String title;
     private String content;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> github/master
 }
